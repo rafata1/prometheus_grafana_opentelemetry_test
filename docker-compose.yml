@@ -1,0 +1,66 @@
+version: '3'
+
+volumes:
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - /etc/prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+
+  service-a:
+    image: rafata1/testing-service:latest
+    container_name: serivce-a
+    environment:
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  service-b:
+    image: rafata1/testing-service:latest
+    container_name: serivce-b
+    environment:
+      - PORT=8081
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+
+  load-balancer:
+    image: rafata1/simple-loadbalancer:latest
+    container_name: testing-load-balancer
+    environment:
+      - PORT=8001
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
+
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
