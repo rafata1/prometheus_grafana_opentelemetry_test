@@ -7,9 +7,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel"
-	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/propagation"
-	"log"
 	"math/rand"
 	"net/http"
 	"os"
@@ -25,10 +23,8 @@ var (
 	})
 )
 
-var serviceC = "http://service-c:8083/Data"
-
 func GetDataHandler(w http.ResponseWriter, req *http.Request) {
-	ctx, span := otel.GetTracerProvider().Tracer("GetDataHandler").Start(req.Context(), "CallServiceB")
+	_, span := otel.GetTracerProvider().Tracer("GetDataHandler").Start(req.Context(), "GetDataHandler")
 	defer span.End()
 	latencies := []time.Duration{
 		1 * time.Millisecond,
@@ -38,23 +34,14 @@ func GetDataHandler(w http.ResponseWriter, req *http.Request) {
 	}
 	time.Sleep(latencies[rand.Int()%len(latencies)])
 
-	_, err := otelhttp.Get(ctx, serviceC)
-	if err != nil {
-		span.RecordError(err)
-		span.SetStatus(codes.Error, err.Error())
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-
 	opsProcessed.Inc()
-	log.Println("get data")
 	w.WriteHeader(http.StatusOK)
 }
 
 func main() {
 	serviceName := os.Getenv("NAME")
 	if len(serviceName) == 0 {
-		serviceName = "DefaultService"
+		serviceName = "RepoService"
 	}
 
 	tracerProvider, shutdown := otellib.InitOtel(serviceName, "local", config.JaegerConfig{
@@ -69,10 +56,10 @@ func main() {
 	mux := &http.ServeMux{}
 
 	mux.Handle("/metrics", promhttp.Handler())
-	mux.Handle("/data", otelhttp.NewHandler(http.HandlerFunc(GetDataHandler), "GetDataHandler"))
+	mux.Handle("/data", otelhttp.NewHandler(http.HandlerFunc(GetDataHandler), "GetDataFromDB"))
 	port := os.Getenv("PORT")
 	if len(port) == 0 {
-		port = "8080"
+		port = "8083"
 	}
 
 	fmt.Printf("service is runing on port %s", port)
