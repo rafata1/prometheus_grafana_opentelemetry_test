@@ -25,7 +25,7 @@ var (
 	})
 )
 
-var serviceC = "http://service-c:8083/Data"
+var serviceC = "http://service-b-master:8083/Data"
 
 func GetDataHandler(w http.ResponseWriter, req *http.Request) {
 	ctx, span := otel.GetTracerProvider().Tracer("GetDataHandler").Start(req.Context(), "CallServiceB")
@@ -58,7 +58,7 @@ func main() {
 	}
 
 	tracerProvider, shutdown := otellib.InitOtel(serviceName, "local", config.JaegerConfig{
-		Host: "localhost",
+		Host: "jaeger",
 		Port: 6831,
 	})
 	defer shutdown()

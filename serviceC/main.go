@@ -45,7 +45,7 @@ func main() {
 	}
 
 	tracerProvider, shutdown := otellib.InitOtel(serviceName, "local", config.JaegerConfig{
-		Host: "localhost",
+		Host: "jaeger",
 		Port: 6831,
 	})
 	defer shutdown()

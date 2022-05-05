@@ -33,13 +33,13 @@ type Service struct {
 }
 
 var serviceA = Service{
-	Name:     "service-a",
-	EndPoint: "http://service-a:8080/data",
+	Name:     "service-a-node-1",
+	EndPoint: "http://service-a-node-1:8080/data",
 }
 
 var serviceB = Service{
-	Name:     "service-b",
-	EndPoint: "http://service-b:8081/data",
+	Name:     "service-a-node-2",
+	EndPoint: "http://service-a-node-2:8081/data",
 }
 
 var RoundRobinCounter int32
@@ -94,7 +94,7 @@ func redirectToService(s Service, ctx context.Context) error {
 
 func main() {
 	tracerProvider, shutdown := otellib.InitOtel("LoadBalancer", "local", config.JaegerConfig{
-		Host: "localhost",
+		Host: "jaeger",
 		Port: 6831,
 	})
 	defer shutdown()
