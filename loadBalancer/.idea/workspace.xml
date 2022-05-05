@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a8fc278-5b86-45d7-beae-912caef87b10" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../client/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/loadBalancer.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serviceA/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serviceA/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../serviceA/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serviceA/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../serviceA/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serviceA/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../serviceA/cmd/main.go" afterDir="false" />
-    </list>
+    <list default="true" id="5a8fc278-5b86-45d7-beae-912caef87b10" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +37,10 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">

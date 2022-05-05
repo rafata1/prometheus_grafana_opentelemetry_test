@@ -25,7 +25,7 @@ var (
 	})
 )
 
-var serviceC = "http://service-b-master:8083/Data"
+var serviceC = "http://service-b-master:8083/data"
 
 func GetDataHandler(w http.ResponseWriter, req *http.Request) {
 	ctx, span := otel.GetTracerProvider().Tracer("GetDataHandler").Start(req.Context(), "CallServiceB")
